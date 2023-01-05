@@ -6,6 +6,7 @@ import java.io.Serializable;
  * 检查项
  */
 public class CheckItem implements Serializable {
+    private static final long serialVersionUID = -5862077205341127319L;
     private Integer id;// 主键
     private String code;// 项目编码
     private String name;// 项目名称

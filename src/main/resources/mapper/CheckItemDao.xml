@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ydlclass.health.dao.CheckItemDao">
+    <insert id="add">
+        insert into t_checkitem(code,name,sex,age,price,type,remark,attention)
+        values
+        (#{checkItem.code},#{checkItem.name},#{checkItem.sex},#{checkItem.age},#{checkItem.price},#{checkItem.type},#{checkItem.remark},#{checkItem.attention})
+    </insert>
+    <update id="edit">
+        update t_checkitem
+        <set>
+            <if test="checkItem.name != null">
+                name = #{checkItem.name},
+            </if>
+            <if test="checkItem.sex != null">
+                sex = #{checkItem.sex},
+            </if>
+            <if test="checkItem.code != null">
+                code = #{checkItem.code},
+            </if>
+            <if test="checkItem.age != null">
+                age = #{checkItem.age},
+            </if>
+            <if test="checkItem.price != null">
+                price = #{checkItem.price},
+            </if>
+            <if test="checkItem.type != null">
+                type = #{checkItem.type},
+            </if>
+            <if test="checkItem.attention != null">
+                attention = #{checkItem.attention},
+            </if>
+            <if test="checkItem.remark != null">
+                remark = #{checkItem.remark},
+            </if>
+        </set>
+        where id = #{checkItem.id}
+    </update>
+
+
+    <select id="findPage" resultType="checkItem">
+        select * from t_checkitem
+        <where>
+            <if test="queryString != null and queryString != '' ">
+                code like concat('%',#{queryString},'%') or name like concat('%',#{queryString},'%')
+            </if>
+        </where>
+    </select>
+
+    <delete id="delete">
+        delete from t_checkitem where id = #{id}
+    </delete>
+
+    <select id="findCountByCheckItemId" resultType="long">
+        select count(1) from t_checkgroup_checkitem where checkitem_id = #{id}
+    </select>
+
+    <select id="findById" resultType="checkItem">
+        select * from t_checkitem where id = #{id};
+    </select>
+</mapper>

@@ -9,6 +9,7 @@ import java.util.Set;
  * 用户
  */
 public class User implements Serializable {
+    private static final long serialVersionUID = 1647852849660833823L;
     private Integer id; // 主键
     private Date birthday; // 生日
     private String gender; // 性别

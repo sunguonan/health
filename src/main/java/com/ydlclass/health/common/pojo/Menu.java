@@ -10,6 +10,7 @@ import java.util.Set;
  * 菜单
  */
 public class Menu implements Serializable {
+    private static final long serialVersionUID = 3369044646678545559L;
     private Integer id;
     private String name; // 菜单名称
     private String linkUrl; // 访问路径

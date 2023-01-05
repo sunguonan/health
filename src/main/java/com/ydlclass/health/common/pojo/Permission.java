@@ -8,6 +8,7 @@ import java.util.Set;
  * 权限
  */
 public class Permission implements Serializable {
+    private static final long serialVersionUID = -7970477328692360643L;
     private Integer id;
     private String name; // 权限名称
     private String keyword; // 权限关键字，用于权限控制

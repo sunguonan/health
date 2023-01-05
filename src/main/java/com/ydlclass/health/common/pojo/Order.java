@@ -11,6 +11,7 @@ public class Order implements Serializable {
     public static final String ORDERTYPE_WEIXIN = "微信预约";
     public static final String ORDERSTATUS_YES = "已到诊";
     public static final String ORDERSTATUS_NO = "未到诊";
+    private static final long serialVersionUID = 9109990616451043980L;
     private Integer id;
     private Integer memberId;// 会员id
     private Date orderDate;// 预约日期

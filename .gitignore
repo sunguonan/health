@@ -5,6 +5,7 @@ mvnw
 mvnw.cmd
 !**/src/main/**/target/
 !**/src/test/**/target/
+**/src/test
 
 ### STS ###
 .apt_generated
@@ -33,3 +34,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/test/java/

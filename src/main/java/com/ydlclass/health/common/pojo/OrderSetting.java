@@ -7,6 +7,7 @@ import java.util.Date;
  * 预约设置
  */
 public class OrderSetting implements Serializable {
+    private static final long serialVersionUID = 8920168086433411379L;
     private Integer id;
     private Date orderDate;// 预约设置日期
     private int number;// 可预约人数

@@ -9,6 +9,7 @@ import java.util.Set;
  * 角色
  */
 public class Role implements Serializable {
+    private static final long serialVersionUID = -4318648821652310450L;
     private Integer id;
     private String name; // 角色名称
     private String keyword; // 角色关键字，用于权限控制

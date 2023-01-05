@@ -6,6 +6,7 @@ import java.io.Serializable;
  * 封装查询条件
  */
 public class QueryPageBean implements Serializable {
+    private static final long serialVersionUID = -6498656069117893615L;
     private Integer currentPage;// 页码
     private Integer pageSize;// 每页记录数
     private String queryString;// 查询条件
