@@ -46,6 +46,12 @@
     <delete id="deleteCheckGroupAndCheckItemRelation">
     delete from t_checkgroup_checkitem where checkgroup_id = #{id};
     </delete>
+    <delete id="DeleteCheckGroupAndCheckItemRelation">
+        delete from t_checkgroup_checkitem where checkgroup_id = #{id};
+    </delete>
+    <delete id="deleteCheckGroupContent">
+        delete from t_checkgroup where id = #{id};
+    </delete>
 
     <select id="findPage" resultType="checkGroup">
         select * from t_checkgroup
@@ -63,6 +69,10 @@
 
     <select id="findCheckItemIdsByCheckGroupId" resultType="java.lang.Integer">
         select checkitem_id from t_checkgroup_checkitem where checkgroup_id = #{id}
+    </select>
+
+    <select id="findCheckGroupAndSetmealRelation" resultType="java.lang.Integer">
+        select count(1) from t_setmeal_checkgroup where checkgroup_id = #{id}
     </select>
 
 </mapper>

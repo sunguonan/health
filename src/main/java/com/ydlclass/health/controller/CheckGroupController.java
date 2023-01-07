@@ -83,4 +83,15 @@ public class CheckGroupController {
         }
     }
 
+    @DeleteMapping("delete.do")
+    public Result delete(@RequestParam("id") Integer id) {
+        try {
+            checkGroupService.delete(id);
+            return new Result(true, MessageConstant.DELETE_CHECKGROUP_SUCCESS);
+        } catch (Exception e) {
+            logger.error("删除时发生异常信息", e);
+            return new Result(false, MessageConstant.DELETE_CHECKGROUP_FAIL);
+        }
+    }
+
 }

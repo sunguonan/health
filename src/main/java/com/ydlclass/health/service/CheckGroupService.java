@@ -20,4 +20,6 @@ public interface CheckGroupService {
     List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
 
     void edit(Integer[] checkitemIds, CheckGroup checkGroup);
+
+    void delete(Integer id);
 }

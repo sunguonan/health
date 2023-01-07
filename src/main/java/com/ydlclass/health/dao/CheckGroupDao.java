@@ -31,4 +31,10 @@ public interface CheckGroupDao {
     void deleteCheckGroupAndCheckItemRelation(@Param("id") Integer id);
 
     void buildCheckGroupAndCheckItemRelation(@Param("checkGroupAndCheckItemData") Map<String, Integer> checkGroupAndCheckItemData);
+
+    Integer findCheckGroupAndSetmealRelation(@Param("id") Integer id);
+
+    void DeleteCheckGroupAndCheckItemRelation(@Param("id") Integer id);
+
+    void deleteCheckGroupContent(@Param("id") Integer id);
 }

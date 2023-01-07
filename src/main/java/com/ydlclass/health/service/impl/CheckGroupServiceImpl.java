@@ -62,6 +62,22 @@ public class CheckGroupServiceImpl implements CheckGroupService {
 
     }
 
+    @Override
+    public void delete(Integer id) {
+
+        // 找出检查组和套餐的关联 如果套餐包含检查组 则失败
+        Integer countRow = checkGroupDao.findCheckGroupAndSetmealRelation(id);
+        if (countRow > 0) {
+            throw new RuntimeException("检查组和套餐有关联,删除失败");
+        }
+        // 清空检查组和检查项关联信息
+        checkGroupDao.DeleteCheckGroupAndCheckItemRelation(id);
+        // 清空检查组信息
+        checkGroupDao.deleteCheckGroupContent(id);
+
+
+    }
+
 
     public void reAssociation(Integer checkgroupId, Integer[] checkitemIds) {
         for (Integer ids : checkitemIds) {
