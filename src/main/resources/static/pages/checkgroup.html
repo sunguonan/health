@@ -57,7 +57,7 @@
             <div class="filter-container">
                 <el-input @keyup.enter.native="handleFilter" class="filter-item" placeholder="编码/名称/助记码"
                           style="width: 200px;" v-model="pagination.queryString"></el-input>
-                <el-button @click="findPage()" class="dalfBut">查询</el-button>
+                <el-button @click="_findPage()" class="dalfBut">查询</el-button>
                 <el-button @click="handleCreate()" class="butT" type="primary">新建</el-button>
             </div>
             <el-table :data="dataList" current-row-key="id" highlight-current-row size="small" stripe>
@@ -337,6 +337,10 @@
                     this.pagination.total = response.data.total;
                 });
             },
+            _findPage() {
+                this.pagination.currentPage = 1;
+                this.findPage();
+            },
             // 重置表单
             resetForm() {
                 this.formData = {};
@@ -345,7 +349,7 @@
             handleCreate() {
                 this.dialogFormVisible = true;
                 this.resetForm();
-                
+        
                 //发送ajax请求查询所有检查项信息
                 axios.get("/checkitem/findAll.do").then((res) => {
                     if (res.data.flag) {

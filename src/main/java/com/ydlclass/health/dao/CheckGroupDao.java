@@ -1,5 +1,6 @@
 package com.ydlclass.health.dao;
 
+import com.github.pagehelper.Page;
 import com.ydlclass.health.common.pojo.CheckGroup;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,4 +19,5 @@ public interface CheckGroupDao {
 
     void addCheckGroupAndCheckItem(@Param("checkGroupAndCheckItemData") Map<String, Integer> checkGroupAndCheckItemData);
 
+    Page<CheckGroup> findPage(@Param("queryString") String queryString);
 }

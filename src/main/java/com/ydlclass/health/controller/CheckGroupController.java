@@ -2,16 +2,15 @@ package com.ydlclass.health.controller;
 
 
 import com.ydlclass.health.common.constant.MessageConstant;
+import com.ydlclass.health.common.entity.PageResult;
+import com.ydlclass.health.common.entity.QueryPageBean;
 import com.ydlclass.health.common.entity.Result;
 import com.ydlclass.health.common.pojo.CheckGroup;
 import com.ydlclass.health.service.CheckGroupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 检查组管理
@@ -43,4 +42,10 @@ public class CheckGroupController {
             return new Result(false, MessageConstant.ADD_CHECKGROUP_FAIL);
         }
     }
+
+    @PostMapping("/findPage.do")
+    public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
+        return checkGroupService.findPage(queryPageBean);
+    }
+
 }
