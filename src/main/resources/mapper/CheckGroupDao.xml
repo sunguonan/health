@@ -23,5 +23,12 @@
             </if>
         </where>
     </select>
+    <select id="findById" resultType="checkGroup">
+        select * from t_checkgroup where id = #{id}
+    </select>
+
+    <select id="findCheckItemIdsByCheckGroupId" resultType="java.lang.Integer">
+        select checkitem_id from t_checkgroup_checkitem where checkgroup_id = #{id}
+    </select>
 
 </mapper>

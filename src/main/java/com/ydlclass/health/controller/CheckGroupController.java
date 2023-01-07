@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 检查组管理
  */
@@ -46,6 +48,28 @@ public class CheckGroupController {
     @PostMapping("/findPage.do")
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
         return checkGroupService.findPage(queryPageBean);
+    }
+
+    @GetMapping("/findById.do")
+    public Result findById(@RequestParam("id") Integer id) {
+        try {
+            CheckGroup checkGroup = checkGroupService.findById(id);
+            return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS, checkGroup);
+        } catch (Exception e) {
+            logger.error("查询检查组发生异常", e);
+            return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
+    }
+
+    @GetMapping("/findCheckItemIdsByCheckGroupId.do")
+    public Result findCheckItemIdsByCheckGroupId(@RequestParam("id") Integer id) {
+        try {
+            List<Integer> listData = checkGroupService.findCheckItemIdsByCheckGroupId(id);
+            return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS, listData);
+        } catch (Exception e) {
+            logger.error("查询检查组中的检查项发生异常", e);
+            return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
+        }
     }
 
 }
