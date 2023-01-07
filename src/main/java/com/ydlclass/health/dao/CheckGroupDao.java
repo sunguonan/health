@@ -25,4 +25,10 @@ public interface CheckGroupDao {
     CheckGroup findById(@Param("id") Integer id);
 
     List<Integer> findCheckItemIdsByCheckGroupId(@Param("id") Integer id);
+
+    void edit(@Param("checkGroup") CheckGroup checkGroup);
+
+    void deleteCheckGroupAndCheckItemRelation(@Param("id") Integer id);
+
+    void buildCheckGroupAndCheckItemRelation(@Param("checkGroupAndCheckItemData") Map<String, Integer> checkGroupAndCheckItemData);
 }

@@ -30,14 +30,7 @@ public class CheckGroupServiceImpl implements CheckGroupService {
     public void add(CheckGroup checkGroup, Integer[] checkitemIds) {
         // 插入检查组的数据
         checkGroupDao.add(checkGroup);
-
-        for (Integer ids : checkitemIds) {
-            Map<String, Integer> checkGroupAndCheckItemData = new HashMap<>(8);
-            checkGroupAndCheckItemData.put("checkgroupId", checkGroup.getId());
-            checkGroupAndCheckItemData.put("checkitemId", ids);
-            // 插入检查组合检查项关联表的数据
-            checkGroupDao.addCheckGroupAndCheckItem(checkGroupAndCheckItemData);
-        }
+        reAssociation(checkGroup.getId(), checkitemIds);
     }
 
     @Override
@@ -57,4 +50,26 @@ public class CheckGroupServiceImpl implements CheckGroupService {
     public List<Integer> findCheckItemIdsByCheckGroupId(Integer id) {
         return checkGroupDao.findCheckItemIdsByCheckGroupId(id);
     }
+
+    @Override
+    public void edit(Integer[] checkitemIds, CheckGroup checkGroup) {
+        // 修改检查组基本信息
+        checkGroupDao.edit(checkGroup);
+        // 清理检查组和检查项的关联关系
+        checkGroupDao.deleteCheckGroupAndCheckItemRelation(checkGroup.getId());
+        // 重新建立关系
+        reAssociation(checkGroup.getId(), checkitemIds);
+
+    }
+
+
+    public void reAssociation(Integer checkgroupId, Integer[] checkitemIds) {
+        for (Integer ids : checkitemIds) {
+            Map<String, Integer> checkGroupAndCheckItemData = new HashMap<>(8);
+            checkGroupAndCheckItemData.put("checkgroupId", checkgroupId);
+            checkGroupAndCheckItemData.put("checkitemId", ids);
+            checkGroupDao.buildCheckGroupAndCheckItemRelation(checkGroupAndCheckItemData);
+        }
+    }
+
 }

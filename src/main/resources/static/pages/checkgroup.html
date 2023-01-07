@@ -285,7 +285,7 @@
             //编辑
             handleEdit() {
                 //发送ajax请求，提交模型数据
-                axios.post("/checkgroup/edit.do?checkitemIds=" + this.checkitemIds, this.formData)
+                axios.put("/checkgroup/edit.do?checkitemIds=" + this.checkitemIds, this.formData)
                     .then((response) => {
                         //隐藏编辑窗口
                         this.dialogFormVisible4Edit = false;
@@ -402,6 +402,31 @@
             },
             // 删除
             handleDelete(row) {
+                //alert(row.id);
+                this.$confirm("确认删除吗？", "提示", {
+                    type: 'warning',
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消'
+                }).then(() => {
+                    //点击确定按钮时只需此处代码
+                    //alert('用户点击的是确定按钮');
+                    axios.delete("/checkgroup/delete.do?id=" + row.id).then((res) => {
+                        if (!res.data.flag) {
+                            //删除失败
+                            this.$message.error(res.data.message);
+                        } else {
+                            //删除成功
+                            this.$message({
+                                message: res.data.message,
+                                type: 'success'
+                            });
+                            //调用分页，获取最新分页数据
+                            this.findPage();
+                        }
+                    });
+                }).catch(() => {
+                    this.$message.error("操作已取消");
+                });
             }
         }
     })
