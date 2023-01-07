@@ -5,6 +5,8 @@ import com.ydlclass.health.common.pojo.CheckItem;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * @author sunGuoNan
  * @version 1.0
@@ -23,4 +25,6 @@ public interface CheckItemDao {
     void edit(@Param("checkItem") CheckItem checkItem);
 
     CheckItem findById(@Param("id") Integer id);
+
+    List<CheckItem> findAll();
 }

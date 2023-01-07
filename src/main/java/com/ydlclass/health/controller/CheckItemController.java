@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author sunGuoNan
  * @version 1.0
@@ -92,6 +94,17 @@ public class CheckItemController {
             return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS, checkItemData);
         } catch (Exception e) {
             LOGGER.error("查询检查项数据发生异常", e);
+            return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
+        }
+    }
+
+    @GetMapping("/findAll.do")
+    public Result findAll() {
+        try {
+            List<CheckItem> checkItemList = checkItemService.findAll();
+            return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS, checkItemList);
+        } catch (Exception e) {
+            LOGGER.error("查询所有检查项发生异常", e);
             return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
         }
     }

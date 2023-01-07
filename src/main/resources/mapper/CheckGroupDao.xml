@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ydlclass.health.dao.CheckGroupDao">
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into t_checkgroup(code, name, helpCode, sex, remark, attention)
+        values
+        (#{checkGroup.code},#{checkGroup.name},#{checkGroup.sex},#{checkGroup.helpCode},#{checkGroup.remark},#{checkGroup.attention})
+    </insert>
+
+    <insert id="addCheckGroupAndCheckItem">    
+        insert into t_checkgroup_checkitem (checkgroup_id, checkitem_id) 
+        values (#{checkGroupAndCheckItemData.checkgroupId},#{checkGroupAndCheckItemData.checkitemId})
+    </insert>
+
+    <insert id="buildCheckGroupAndCheckItemRelation">
+        insert into t_checkgroup_checkitem (checkgroup_id, checkitem_id) 
+        values (#{checkGroupAndCheckItemData.checkgroupId},#{checkGroupAndCheckItemData.checkitemId})
+    </insert>
+
+    <update id="edit">
+        update t_checkgroup
+        <set>
+            <if test="checkGroup.name != null">
+                name = #{checkGroup.name},
+            </if>
+            <if test="checkGroup.sex != null">
+                sex = #{checkGroup.sex},
+            </if>
+            <if test="checkGroup.code != null">
+                code = #{checkGroup.code},
+            </if>
+            <if test="checkGroup.helpCode != null">
+                helpCode = #{checkGroup.helpCode},
+            </if>
+            <if test="checkGroup.attention != null">
+                attention = #{checkGroup.attention},
+            </if>
+            <if test="checkGroup.remark != null">
+                remark = #{checkGroup.remark},
+            </if>
+        </set>
+        where id = #{checkGroup.id}
+    </update>
+
+    <delete id="deleteCheckGroupAndCheckItemRelation">
+    delete from t_checkgroup_checkitem where checkgroup_id = #{id};
+    </delete>
+    <delete id="DeleteCheckGroupAndCheckItemRelation">
+        delete from t_checkgroup_checkitem where checkgroup_id = #{id};
+    </delete>
+    <delete id="deleteCheckGroupContent">
+        delete from t_checkgroup where id = #{id};
+    </delete>
+
+    <select id="findPage" resultType="checkGroup">
+        select * from t_checkgroup
+        <where>
+            <if test="queryString != null and queryString != '' ">
+                code like concat('%',#{queryString},'%')
+                or name like concat('%',#{queryString},'%')
+                or helpCode like concat('%',#{queryString},'%')
+            </if>
+        </where>
+    </select>
+    <select id="findById" resultType="checkGroup">
+        select * from t_checkgroup where id = #{id}
+    </select>
+
+    <select id="findCheckItemIdsByCheckGroupId" resultType="java.lang.Integer">
+        select checkitem_id from t_checkgroup_checkitem where checkgroup_id = #{id}
+    </select>
+
+    <select id="findCheckGroupAndSetmealRelation" resultType="java.lang.Integer">
+        select count(1) from t_setmeal_checkgroup where checkgroup_id = #{id}
+    </select>
+
+</mapper>
