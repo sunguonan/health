@@ -59,4 +59,8 @@
     <select id="findById" resultType="checkItem">
         select * from t_checkitem where id = #{id};
     </select>
+
+    <select id="findAll" resultType="com.ydlclass.health.common.pojo.CheckItem">
+        select * from t_checkitem;
+    </select>
 </mapper>

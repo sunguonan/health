@@ -4,6 +4,8 @@ import com.ydlclass.health.common.entity.PageResult;
 import com.ydlclass.health.common.entity.QueryPageBean;
 import com.ydlclass.health.common.pojo.CheckItem;
 
+import java.util.List;
+
 /**
  * @author sunGuoNan
  * @version 1.0
@@ -18,4 +20,6 @@ public interface CheckItemService {
     void edit(CheckItem checkItem);
 
     CheckItem findById(Integer id);
+
+    List<CheckItem> findAll();
 }
