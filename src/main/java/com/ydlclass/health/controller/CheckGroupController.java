@@ -7,8 +7,7 @@ import com.ydlclass.health.common.entity.QueryPageBean;
 import com.ydlclass.health.common.entity.Result;
 import com.ydlclass.health.common.pojo.CheckGroup;
 import com.ydlclass.health.service.CheckGroupService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +17,11 @@ import java.util.List;
  * 检查组管理
  */
 @RestController
+@Slf4j
 @RequestMapping("/checkgroup")
 public class CheckGroupController {
     @Autowired
     private CheckGroupService checkGroupService;
-
-    private Logger logger = LoggerFactory.getLogger(CheckGroupController.class);
 
     /**
      * 新增检查组
@@ -39,7 +37,7 @@ public class CheckGroupController {
             // 新增成功
             return new Result(true, MessageConstant.ADD_CHECKGROUP_SUCCESS);
         } catch (Exception e) {
-            logger.error("添加检查组发生异常", e);
+            log.error("添加检查组发生异常", e);
             // 新增失败
             return new Result(false, MessageConstant.ADD_CHECKGROUP_FAIL);
         }
@@ -56,7 +54,7 @@ public class CheckGroupController {
             CheckGroup checkGroup = checkGroupService.findById(id);
             return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS, checkGroup);
         } catch (Exception e) {
-            logger.error("查询检查组发生异常", e);
+            log.error("查询检查组发生异常", e);
             return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
         }
     }
@@ -67,7 +65,7 @@ public class CheckGroupController {
             List<Integer> listData = checkGroupService.findCheckItemIdsByCheckGroupId(id);
             return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS, listData);
         } catch (Exception e) {
-            logger.error("查询检查组中的检查项发生异常", e);
+            log.error("查询检查组中的检查项发生异常", e);
             return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
         }
     }
@@ -78,7 +76,7 @@ public class CheckGroupController {
             checkGroupService.edit(checkitemIds, checkGroup);
             return new Result(true, MessageConstant.EDIT_CHECKGROUP_SUCCESS);
         } catch (Exception e) {
-            logger.error("修改检查组失败", e);
+            log.error("修改检查组失败", e);
             return new Result(false, MessageConstant.EDIT_CHECKGROUP_FAIL);
         }
     }
@@ -89,7 +87,7 @@ public class CheckGroupController {
             checkGroupService.delete(id);
             return new Result(true, MessageConstant.DELETE_CHECKGROUP_SUCCESS);
         } catch (Exception e) {
-            logger.error("删除时发生异常信息", e);
+            log.error("删除时发生异常信息", e);
             return new Result(false, MessageConstant.DELETE_CHECKGROUP_FAIL);
         }
     }

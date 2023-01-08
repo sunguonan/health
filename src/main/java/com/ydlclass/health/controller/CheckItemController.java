@@ -6,8 +6,7 @@ import com.ydlclass.health.common.entity.QueryPageBean;
 import com.ydlclass.health.common.entity.Result;
 import com.ydlclass.health.common.pojo.CheckItem;
 import com.ydlclass.health.service.CheckItemService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +18,8 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/checkitem")
+@Slf4j
 public class CheckItemController {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(CheckItemController.class);
     @Autowired
     private CheckItemService checkItemService;
 
@@ -37,7 +35,7 @@ public class CheckItemController {
             checkItemService.add(checkItem);
             return new Result(true, MessageConstant.ADD_CHECKITEM_SUCCESS);
         } catch (Exception e) {
-            LOGGER.error("添加时发生异常信息", e);
+            log.error("添加时发生异常信息", e);
             return new Result(false, MessageConstant.ADD_CHECKITEM_FAIL);
         }
     }
@@ -65,7 +63,7 @@ public class CheckItemController {
             checkItemService.delete(id);
             return new Result(true, MessageConstant.DELETE_CHECKITEM_SUCCESS);
         } catch (Exception e) {
-            LOGGER.error("删除时发生异常信息", e);
+            log.error("删除时发生异常信息", e);
             return new Result(false, MessageConstant.DELETE_CHECKITEM_FAIL);
         }
     }
@@ -82,7 +80,7 @@ public class CheckItemController {
             checkItemService.edit(checkItem);
             return new Result(true, MessageConstant.EDIT_CHECKITEM_SUCCESS);
         } catch (Exception e) {
-            LOGGER.error("修改数据发生异常", e);
+            log.error("修改数据发生异常", e);
             return new Result(false, MessageConstant.EDIT_CHECKITEM_FAIL);
         }
     }
@@ -93,7 +91,7 @@ public class CheckItemController {
             CheckItem checkItemData = checkItemService.findById(id);
             return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS, checkItemData);
         } catch (Exception e) {
-            LOGGER.error("查询检查项数据发生异常", e);
+            log.error("查询检查项数据发生异常", e);
             return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
         }
     }
@@ -104,7 +102,7 @@ public class CheckItemController {
             List<CheckItem> checkItemList = checkItemService.findAll();
             return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS, checkItemList);
         } catch (Exception e) {
-            LOGGER.error("查询所有检查项发生异常", e);
+            log.error("查询所有检查项发生异常", e);
             return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
         }
     }

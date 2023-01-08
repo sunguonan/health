@@ -9,5 +9,5 @@ mybatis:
   type-aliases-package: com.ydlclass.health.common.pojo
   mapper-locations: classpath:mapper/**/*.xml
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
     map-underscore-to-camel-case: true
