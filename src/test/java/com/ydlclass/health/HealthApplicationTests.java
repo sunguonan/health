@@ -2,17 +2,22 @@ package com.ydlclass.health;
 
 
 import com.ydlclass.health.common.pojo.CheckItem;
+import com.ydlclass.health.controller.SetMealController;
 import com.ydlclass.health.dao.CheckItemDao;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
+@Slf4j
 class HealthApplicationTests {
 
     @Autowired
     private CheckItemDao checkItemDao;
+
+    @Autowired
+    private SetMealController setMealController;
 
 
     @Test
@@ -35,17 +40,16 @@ class HealthApplicationTests {
 
     @Test
     public void test11() {
-        Logger logger = Logger.getLogger(HealthApplicationTests.class);
+        // 日志的记录
+        log.error("error信息");
+        log.warn("warn信息");
+        log.info("info信息");
+        log.debug("debug信息");
+        log.trace("trace信息");
+        // 系统业务逻辑
+        for (int i = 0; i < 100; i++) {
+            System.out.println("------------------");
+        }
 
-        // 日志记录输出
-        logger.info("hello log4j");
-        // 日志级别
-        logger.fatal("fatal"); // 严重错误，一般会造成系统崩溃和终止运行
-        logger.error("error"); // 错误信息，但不会影响系统运行
-        logger.warn("warn"); // 警告信息，可能会发生问题
-        logger.info("info"); // 程序运行信息，数据库的连接、网络、IO操作等
-        logger.debug("debug"); // 调试信息，一般在开发阶段使用，记录程序的变量、参数等
-        logger.trace("trace"); // 追踪信息，记录程序的所有流程信息
     }
-
 }

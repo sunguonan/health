@@ -37,4 +37,7 @@ public interface CheckGroupDao {
     void DeleteCheckGroupAndCheckItemRelation(@Param("id") Integer id);
 
     void deleteCheckGroupContent(@Param("id") Integer id);
+
+    List<CheckGroup> findAll();
+
 }
