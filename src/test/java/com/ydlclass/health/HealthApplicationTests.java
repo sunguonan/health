@@ -2,6 +2,7 @@ package com.ydlclass.health;
 
 
 import com.ydlclass.health.common.pojo.CheckItem;
+import com.ydlclass.health.controller.SetMealController;
 import com.ydlclass.health.dao.CheckItemDao;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,9 @@ class HealthApplicationTests {
 
     @Autowired
     private CheckItemDao checkItemDao;
+
+    @Autowired
+    private SetMealController setMealController;
 
 
     @Test
@@ -48,5 +52,4 @@ class HealthApplicationTests {
         }
 
     }
-
 }

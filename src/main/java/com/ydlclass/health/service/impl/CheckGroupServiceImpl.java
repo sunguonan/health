@@ -88,6 +88,11 @@ public class CheckGroupServiceImpl implements CheckGroupService {
         log.info("清空检查组信息结束");
     }
 
+    @Override
+    public List<CheckGroup> findAll() {
+        return checkGroupDao.findAll();
+    }
+
 
     public void reAssociation(Integer checkgroupId, Integer[] checkitemIds) {
         for (Integer ids : checkitemIds) {

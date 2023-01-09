@@ -2,32 +2,35 @@
 <configuration status="WARN" monitorInterval="300">
     <!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
     <Properties>
-        <property name="LOG_CONSOLE" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %C[%L] - %msg%n"/>
+        <property name="LOG_CONSOLE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %C[%L] - %msg%n"/>
         <property name="LOG_FILE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %l - %msg%n"/>
         <property name="LOG_PATH" value="D:\workBench\sourceCode\log"/>
     </Properties>
 
     <appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${LOG_CONSOLE}"/>
+            <PatternLayout pattern="${LOG_CONSOLE_PATTERN}"/>
         </Console>
 
         <File name="File" filename="${LOG_PATH}/health.log" append="true">
             <PatternLayout pattern="${LOG_FILE_PATTERN}"/>
-            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
         </File>
     </appenders>
 
     <loggers>
-        <AsyncLogger name="com.ydlclass" level="DEBUG" additivity="false" includeLocation="false">
+        <!-- includeLocation="false" 忽略行号信息 -->
+        <AsyncLogger name="com.ydlclass" level="DEBUG" additivity="false">
             <appender-ref ref="Console"/>
         </AsyncLogger>
+
 
         <logger name="org.mybatis" level="INFO"/>
         <logger name="org.springframework" level="INFO"/>
 
         <root level="INFO">
             <appender-ref ref="Console"/>
+            <appender-ref ref="File"/>
         </root>
     </loggers>
 

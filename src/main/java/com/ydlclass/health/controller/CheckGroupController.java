@@ -92,4 +92,15 @@ public class CheckGroupController {
         }
     }
 
+    @GetMapping("/findAll.do")
+    public Result findAll() {
+        try {
+            List<CheckGroup> checkGroupList = checkGroupService.findAll();
+            return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS, checkGroupList);
+        } catch (Exception e) {
+            log.error("查找所有检查组时发生异常信息", e);
+            return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
+    }
+
 }
