@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class QiNiuUtils {
-
     private static final String accessKey = "DzxvEn3U4c8I7WrlIidQQfiiUPZLB91UGBHjY2CC";
     private static final String secretKey = "oDGHAa9SOp9g7taavfBcnP0roByrY74ciZzEpjRq";
     private static final String bucket = "space-sgn";
@@ -80,9 +79,9 @@ public class QiNiuUtils {
             log.info("上传成功文件的hash值[{}]", putRet.hash);
         } catch (QiniuException ex) {
             Response r = ex.response;
-            System.err.println(r.toString());
+            log.error(r.toString());
             try {
-                System.err.println(r.bodyString());
+                log.error(r.bodyString());
             } catch (QiniuException ex2) {
                 // ignore
             }
@@ -103,8 +102,8 @@ public class QiNiuUtils {
             bucketManager.delete(bucket, fileName);
         } catch (QiniuException ex) {
             // 如果遇到异常，说明删除失败
-            System.err.println(ex.code());
-            System.err.println(ex.response.toString());
+            log.error("{}", ex.code());
+            log.error(ex.response.toString());
         }
     }
 
