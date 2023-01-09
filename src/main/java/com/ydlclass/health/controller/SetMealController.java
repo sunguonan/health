@@ -1,12 +1,16 @@
 package com.ydlclass.health.controller;
 
 import com.ydlclass.health.common.constant.MessageConstant;
+import com.ydlclass.health.common.constant.RedisConstant;
+import com.ydlclass.health.common.entity.PageResult;
+import com.ydlclass.health.common.entity.QueryPageBean;
 import com.ydlclass.health.common.entity.Result;
 import com.ydlclass.health.common.pojo.Setmeal;
 import com.ydlclass.health.service.SetMealService;
 import com.ydlclass.health.util.QiNiuUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +29,9 @@ public class SetMealController {
     @Autowired
     private SetMealService setMealService;
 
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
 
     @RequestMapping("upload.do")
     public Result upload(@RequestParam("imgFile") MultipartFile multipartFile) {
@@ -39,7 +46,10 @@ public class SetMealController {
         String fileName = UUID.randomUUID() + fileNameSuffix;
 
         try {
+            // 上传七牛云存储
             QiNiuUtils.uploadQiNiuToBytes(multipartFile.getBytes(), fileName);
+            // 把文件名存放到Redis中
+            redisTemplate.boundSetOps(RedisConstant.SETMEAL_PIC_RESOURCES).add(fileName);
             return new Result(true, MessageConstant.PIC_UPLOAD_SUCCESS, fileName);
         } catch (IOException e) {
             log.error("图片上传失败", e);
@@ -49,7 +59,6 @@ public class SetMealController {
 
     @PutMapping("add.do")
     public Result add(@RequestParam("checkgroupIds") Integer[] checkgroupIds, @RequestBody Setmeal setmeal) {
-
         try {
             setMealService.add(checkgroupIds, setmeal);
             return new Result(true, MessageConstant.ADD_SETMEAL_SUCCESS);
@@ -57,7 +66,11 @@ public class SetMealController {
             log.error("添加套餐发生异常", e);
             return new Result(false, MessageConstant.ADD_SETMEAL_FAIL);
         }
+    }
 
+    @PostMapping("/findPage.do")
+    public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
+        return setMealService.findPage(queryPageBean);
     }
 
 

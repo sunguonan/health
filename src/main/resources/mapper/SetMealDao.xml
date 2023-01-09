@@ -15,9 +15,21 @@
         #{setmeal.price},
         #{setmeal.img})
     </insert>
+
     <insert id="buildSetMealAndCheckGroupId">
         insert into t_setmeal_checkgroup(setmeal_id,checkgroup_id)
         values
         (#{setmealAndCheckGroupData.setmealid},#{setmealAndCheckGroupData.checkgroupId})
     </insert>
+
+    <select id="findPage" resultType="setmeal">
+        select * from t_setmeal
+        <where>
+            <if test="queryString != null and queryString != ''">
+                name like concat('%',#{queryString},'%')
+                or code like concat('%',#{queryString},'%')
+                or helpCode like concat('%',#{queryString},'%')
+            </if>
+        </where>
+    </select>
 </mapper>

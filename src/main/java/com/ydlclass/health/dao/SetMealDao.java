@@ -1,5 +1,6 @@
 package com.ydlclass.health.dao;
 
+import com.github.pagehelper.Page;
 import com.ydlclass.health.common.pojo.Setmeal;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,4 +18,6 @@ public interface SetMealDao {
 
 
     void buildSetMealAndCheckGroupId(@Param("setmealAndCheckGroupData") Map<String, Integer> setmealAndCheckGroupData);
+
+    Page<Setmeal> findPage(@Param("queryString") String queryString);
 }
