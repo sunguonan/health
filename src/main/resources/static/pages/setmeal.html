@@ -283,7 +283,7 @@
             //添加
             handleAdd() {
                 //发送ajax请求，将表单数据（套餐基本信息、检查组ID）提交到后台进行处理
-                axios.post("/setmeal/add.do?checkgroupIds=" + this.checkgroupIds, this.formData).then((res) => {
+                axios.put("/setmeal/add.do?checkgroupIds=" + this.checkgroupIds, this.formData).then((res) => {
                     //关闭新增窗口
                     this.dialogFormVisible = false;
                     if (res.data.flag) {

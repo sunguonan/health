@@ -2,11 +2,12 @@ package com.ydlclass.health.controller;
 
 import com.ydlclass.health.common.constant.MessageConstant;
 import com.ydlclass.health.common.entity.Result;
+import com.ydlclass.health.common.pojo.Setmeal;
+import com.ydlclass.health.service.SetMealService;
 import com.ydlclass.health.util.QiNiuUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -20,7 +21,11 @@ import java.util.UUID;
 @RequestMapping("/setmeal")
 @Slf4j
 public class SetMealController {
-    /*  */
+
+    @Autowired
+    private SetMealService setMealService;
+
+
     @RequestMapping("upload.do")
     public Result upload(@RequestParam("imgFile") MultipartFile multipartFile) {
         String fileNameSuffix = null;
@@ -40,6 +45,19 @@ public class SetMealController {
             log.error("图片上传失败", e);
             return new Result(false, MessageConstant.PIC_UPLOAD_FAIL);
         }
+    }
+
+    @PutMapping("add.do")
+    public Result add(@RequestParam("checkgroupIds") Integer[] checkgroupIds, @RequestBody Setmeal setmeal) {
+
+        try {
+            setMealService.add(checkgroupIds, setmeal);
+            return new Result(true, MessageConstant.ADD_SETMEAL_SUCCESS);
+        } catch (Exception e) {
+            log.error("添加套餐发生异常", e);
+            return new Result(false, MessageConstant.ADD_SETMEAL_FAIL);
+        }
+
     }
 
 

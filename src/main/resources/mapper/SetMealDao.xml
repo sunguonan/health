@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ydlclass.health.dao.SetMealDao">
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into t_setmeal(code,name,sex,helpCode,remark,attention,age,price,img)
+        values(#{setmeal.code},
+        #{setmeal.name},
+        #{setmeal.sex},
+        #{setmeal.helpCode},
+        #{setmeal.remark},
+        #{setmeal.attention},
+        #{setmeal.age},
+        #{setmeal.price},
+        #{setmeal.img})
+    </insert>
+    <insert id="buildSetMealAndCheckGroupId">
+        insert into t_setmeal_checkgroup(setmeal_id,checkgroup_id)
+        values
+        (#{setmealAndCheckGroupData.setmealid},#{setmealAndCheckGroupData.checkgroupId})
+    </insert>
+</mapper>
