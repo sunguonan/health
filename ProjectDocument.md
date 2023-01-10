@@ -43,14 +43,3 @@ W：W 字符代表着工作日 (星期一到星期五)，只能用在日域上�
 0/2 * * * * *
 从每分钟的0秒开始每隔2秒执行一次
 一分钟执行30次
-
-@Component
-public class ScheduleTest {
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-    @Scheduled(cron = "0/2 * * * * *")
-    public void print1() {
-        System.out.println("这是定时任务1》》》》》" + sdf.format(new Date()));
-    }
-
-}

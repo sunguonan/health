@@ -42,8 +42,6 @@ public class QiNiuUtils {
             Response response = uploadManager.put(filePath, fileName, upToken);
             // 解析上传成功的结果
             DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-            log.info("上传成功文件的key值[{}]", putRet.key);
-            log.info("上传成功文件的hash值[{}]", putRet.hash);
         } catch (QiniuException ex) {
             Response r = ex.response;
             log.error("上传失败发生异常", ex);
@@ -75,8 +73,6 @@ public class QiNiuUtils {
             Response response = uploadManager.put(bytes, fileName, upToken);
             // 解析上传成功的结果
             DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-            log.info("上传成功文件的key值[{}]", putRet.key);
-            log.info("上传成功文件的hash值[{}]", putRet.hash);
         } catch (QiniuException ex) {
             Response r = ex.response;
             log.error(r.toString());
