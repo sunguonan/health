@@ -1,6 +1,7 @@
 package com.ydlclass.health.common.pojo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,6 +13,8 @@ public class OrderSetting implements Serializable {
     private Date orderDate;// 预约设置日期
     private int number;// 可预约人数
     private int reservations;// 已预约人数
+
+    private int date;
 
     public OrderSetting() {
     }
@@ -51,5 +54,15 @@ public class OrderSetting implements Serializable {
 
     public void setReservations(int reservations) {
         this.reservations = reservations;
+    }
+
+    public int getDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");
+        String day = simpleDateFormat.format(this.orderDate);
+        return Integer.parseInt(day);
+    }
+
+    public void setDate(int data) {
+        this.date = data;
     }
 }

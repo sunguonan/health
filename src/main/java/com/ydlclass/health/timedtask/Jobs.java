@@ -22,7 +22,7 @@ public class Jobs {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-    @Scheduled(cron = "0 0,1 0 1 1 ? *")
+    @Scheduled(cron = "0 0 0 1 3 ?")
     public void timingDeleteImages() {
         // 找出Redis中两个键的差值
         Set<String> diffImageData =
