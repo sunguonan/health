@@ -12,4 +12,6 @@ public interface OrderSettingService {
     void add(List<OrderSetting> readExcelData);
 
     List<OrderSetting> orderSettingByMonth(String date);
+
+    void editNumberByDate(OrderSetting orderSetting);
 }

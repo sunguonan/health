@@ -7,10 +7,7 @@ import com.ydlclass.health.service.OrderSettingService;
 import com.ydlclass.health.util.POIUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -55,6 +52,17 @@ public class OrderSettingController {
         } catch (Exception e) {
             log.error("预约信息发生异常信息", e);
             return new Result(false, MessageConstant.GET_ORDERSETTING_FAIL);
+        }
+    }
+
+    @PutMapping("editNumberByDate.do")
+    public Result editNumberByDate(@RequestBody OrderSetting orderSetting) {
+        try {
+            orderSettingService.editNumberByDate(orderSetting);
+            return new Result(true, MessageConstant.ORDERSETTING_SUCCESS);
+        } catch (Exception e) {
+            log.error("修改预约发生异常信息", e);
+            return new Result(false, MessageConstant.ORDERSETTING_FAIL);
         }
     }
 

@@ -4,7 +4,6 @@ import com.ydlclass.health.common.pojo.OrderSetting;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,12 +15,13 @@ import java.util.List;
 public interface OrderSettingDao {
 
 
-    long findCountByOrderDate(@Param("orderDate") Date orderDate);
+    long findCountByOrderDate(@Param("formatDate") String formatDate);
 
-    void editNumberByOrderDate(OrderSetting orderSetting);
 
     void add(@Param("orderSetting") OrderSetting orderSetting);
 
 
     List<OrderSetting> orderSettingByMonth(@Param("hashMap") HashMap<String, String> hashMap);
+
+    void editNumberByOrderDate(@Param("number") int number, @Param("formatDate") String formatDate);
 }

@@ -10,11 +10,13 @@
     <update id="editNumberByOrderDate">
         update t_ordersetting
           set number = #{number}
-          where orderDate = #{orderDate}
+          where orderDate = #{formatDate}
     </update>
-    <select id="findCountByOrderDate" parameterType="date" resultType="long">
-        select count(id) from t_ordersetting where orderDate = #{orderDate}
+
+    <select id="findCountByOrderDate" resultType="long">
+        select count(id) from t_ordersetting where orderDate = #{formatDate}
     </select>
+    
     <select id="orderSettingByMonth" resultType="orderSetting">
         select * from t_ordersetting where orderDate between #{hashMap.begin} and #{hashMap.end};
     </select>
