@@ -78,4 +78,24 @@
         select * from t_checkgroup;
     </select>
 
+    <resultMap id="baseResultMap" type="checkGroup">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+    </resultMap>
+
+    <resultMap id="findByIdResultMapToCheckItem" type="checkGroup">
+        <collection property="checkItems" ofType="checkItem"
+                    select="com.ydlclass.health.dao.CheckItemDao.findCheckItemId" column="id"/>
+    </resultMap>
+
+    <select id="findCheckGroupId" resultMap="findByIdResultMapToCheckItem">
+        select * from t_checkgroup 
+        where id in(select checkgroup_id from t_setmeal_checkgroup where setmeal_id = #{id});
+    </select>
+
 </mapper>

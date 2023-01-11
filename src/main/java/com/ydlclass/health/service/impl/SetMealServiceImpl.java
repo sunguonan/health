@@ -53,6 +53,11 @@ public class SetMealServiceImpl implements SetMealService {
         return setMealDao.getAllSetmeal();
     }
 
+    @Override
+    public Setmeal findById(Integer id) {
+        return setMealDao.findById(id);
+    }
+
 
     public void reAssociation(Integer setMealId, Integer[] checkgroupIds) {
         for (Integer ids : checkgroupIds) {

@@ -17,4 +17,6 @@ public interface SetMealService {
     PageResult findPage(QueryPageBean queryPageBean);
 
     List<Setmeal> getAllSetmeal();
+
+    Setmeal findById(Integer id);
 }

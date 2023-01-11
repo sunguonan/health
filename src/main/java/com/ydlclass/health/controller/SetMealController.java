@@ -85,5 +85,16 @@ public class SetMealController {
         }
     }
 
+    @GetMapping("findById.do")
+    public Result findById(@RequestParam("id") Integer id) {
+        try {
+            Setmeal setmeal = setMealService.findById(id);
+            return new Result(true, MessageConstant.QUERY_SETMEAL_SUCCESS, setmeal);
+        } catch (Exception e) {
+            log.error("查询套餐发生异常", e);
+            return new Result(false, MessageConstant.QUERY_SETMEALLIST_FAIL);
+        }
+    }
+
 
 }

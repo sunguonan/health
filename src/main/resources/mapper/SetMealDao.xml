@@ -35,4 +35,27 @@
     <select id="getAllSetmeal" resultType="setmeal">
         select * from t_setmeal
     </select>
+
+    <select id="findById" resultMap="findByIdResultMapToCheckGroup">
+        select * from t_setmeal where id = #{id};
+    </select>
+
+    <resultMap id="baseResultMap" type="setmeal">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="price" property="price"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+        <result column="img" property="img"/>
+    </resultMap>
+
+    <resultMap id="findByIdResultMapToCheckGroup" type="setmeal" extends="baseResultMap">
+        <collection property="checkGroups" ofType="checkGroup"
+                    select="com.ydlclass.health.dao.CheckGroupDao.findCheckGroupId" column="id"/>
+    </resultMap>
+
 </mapper>

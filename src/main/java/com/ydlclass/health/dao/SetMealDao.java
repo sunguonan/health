@@ -23,4 +23,6 @@ public interface SetMealDao {
     Page<Setmeal> findPage(@Param("queryString") String queryString);
 
     List<Setmeal> getAllSetmeal();
+
+    Setmeal findById(Integer id);
 }
