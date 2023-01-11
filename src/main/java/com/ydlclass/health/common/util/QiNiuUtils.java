@@ -1,4 +1,4 @@
-package com.ydlclass.health.util;
+package com.ydlclass.health.common.util;
 
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;

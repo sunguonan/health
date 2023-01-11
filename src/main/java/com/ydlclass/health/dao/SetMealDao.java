@@ -5,6 +5,7 @@ import com.ydlclass.health.common.pojo.Setmeal;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,4 +21,6 @@ public interface SetMealDao {
     void buildSetMealAndCheckGroupId(@Param("setmealAndCheckGroupData") Map<String, Integer> setmealAndCheckGroupData);
 
     Page<Setmeal> findPage(@Param("queryString") String queryString);
+
+    List<Setmeal> getAllSetmeal();
 }

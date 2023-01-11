@@ -1,7 +1,7 @@
 package com.ydlclass.health.timedtask;
 
 import com.ydlclass.health.common.constant.RedisConstant;
-import com.ydlclass.health.util.QiNiuUtils;
+import com.ydlclass.health.common.util.QiNiuUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;

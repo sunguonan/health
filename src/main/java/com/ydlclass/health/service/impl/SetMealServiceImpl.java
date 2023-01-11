@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -45,6 +46,11 @@ public class SetMealServiceImpl implements SetMealService {
         PageHelper.startPage(queryPageBean.getCurrentPage(), queryPageBean.getPageSize());
         Page<Setmeal> setmealPage = setMealDao.findPage(queryPageBean.getQueryString());
         return new PageResult(setmealPage.getTotal(), setmealPage.getResult());
+    }
+
+    @Override
+    public List<Setmeal> getAllSetmeal() {
+        return setMealDao.getAllSetmeal();
     }
 
 

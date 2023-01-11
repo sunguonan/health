@@ -32,4 +32,7 @@
             </if>
         </where>
     </select>
+    <select id="getAllSetmeal" resultType="setmeal">
+        select * from t_setmeal
+    </select>
 </mapper>
