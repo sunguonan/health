@@ -8,6 +8,9 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
+  freemarker:
+    template-loader-path: classpath:static/pages/
+    charset: utf-8
 mybatis:
   type-aliases-package: com.ydlclass.health.common.pojo
   mapper-locations: classpath:mapper/**/*.xml
@@ -16,3 +19,4 @@ mybatis:
     map-underscore-to-camel-case: true
 logging:
   config: classpath:log4j2.xml
+freeMarkerOutPutPath: D:\workBench\sourceCode\health\src\main\resources\static\pages\
