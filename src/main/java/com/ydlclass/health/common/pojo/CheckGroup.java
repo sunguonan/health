@@ -21,7 +21,7 @@ public class CheckGroup implements Serializable {
         return checkItems;
     }
 
-    public void setCheckItems(List<CheckItem> cxsheckItems) {
+    public void setCheckItems(List<CheckItem> checkItems) {
         this.checkItems = checkItems;
     }
 
