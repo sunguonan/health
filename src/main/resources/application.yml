@@ -8,6 +8,7 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
+    database: 0
   freemarker:
     template-loader-path: classpath:static/pages/
     charset: utf-8

@@ -45,5 +45,5 @@ W：W 字符代表着工作日 (星期一到星期五)，只能用在日域上�
 一分钟执行30次
 
 json --> {name:User.getname()} 使用get方法拿出对应的值
-mybatis --> select * from table; 查出数据 调用setxxx()方法 存放值
+mybatis --> select * from table; 查出数据 调用setxxx()方法 存放在实体类中 到时候要用的时候 调用getxxx()方法获取即可
 
