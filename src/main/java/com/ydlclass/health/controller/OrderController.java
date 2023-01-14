@@ -32,7 +32,7 @@ public class OrderController {
         // 校验验证码
         // 从Redis中取出验证码信息
         String telephone = map.get("telephone");
-        String key = RedisMessageConstant.ORDER_MESSAGE + telephone + RedisMessageConstant.SENDTYPE_ORDER;
+        String key = telephone + RedisMessageConstant.SENDTYPE_ORDER;
         Set<String> redisVerificationCode = redisTemplate.boundSetOps(key).members();
         // 获取用户传入验证码
         String validateCode = map.get("validateCode");

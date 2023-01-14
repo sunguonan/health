@@ -9,7 +9,7 @@ public class MD5Utils {
      * 使用md5的算法进行加密
      */
     public static String md5(String plainText) {
-        byte[] secretBytes = null;
+        byte[] secretBytes;
         try {
             secretBytes = MessageDigest.getInstance("md5").digest(
                     plainText.getBytes());
@@ -23,9 +23,4 @@ public class MD5Utils {
         }
         return md5code;
     }
-
-    public static void main(String[] args) {
-        System.out.println(md5("1234"));
-    }
-
 }

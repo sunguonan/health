@@ -30,12 +30,12 @@ public class VailDateCodeController {
     public Result send4Order(@RequestParam("telephone") String telephone) {
         try {
             // 生成随机数
-            String validateCode = ValidateCodeUtils.generateValidateCode4String(6);
+            String validateCode = ValidateCodeUtils.generateValidateCode4String(4);
             // 发送验证码
             // SMSUtils.sendShortMessage(SMSUtils.VALIDATE_CODE, telephone, validateCode);
-            log.info("验证码已发送{}", validateCode);
+            log.info("预约验证码已发送{}", validateCode);
             // 保存验证码   key[15555555-001]  value[6789]
-            String key = RedisMessageConstant.ORDER_MESSAGE + telephone + RedisMessageConstant.SENDTYPE_ORDER;
+            String key = telephone + RedisMessageConstant.SENDTYPE_ORDER;
             BoundSetOperations<String, String> operations = redisTemplate.boundSetOps(key);
             operations.add(validateCode);
             // 设置key值过期时间
@@ -46,4 +46,27 @@ public class VailDateCodeController {
             return new Result(false, MessageConstant.SEND_VALIDATECODE_FAIL);
         }
     }
+
+    @PostMapping("/send4Login.do")
+    public Result send4Login(@RequestParam("telephone") String telephone) {
+        try {
+            // 生成随机数
+            String validateCode = ValidateCodeUtils.generateValidateCode4String(6);
+            // 发送验证码
+            // SMSUtils.sendShortMessage(SMSUtils.VALIDATE_CODE, telephone, validateCode);
+            log.info("登入验证码已发送{}", validateCode);
+            // 保存验证码   key[15555555-001]  value[6789]
+            String key = telephone + RedisMessageConstant.SENDTYPE_LOGIN;
+            BoundSetOperations<String, String> operations = redisTemplate.boundSetOps(key);
+            operations.add(validateCode);
+            // 设置key值过期时间
+            operations.expire(5, TimeUnit.MINUTES);
+            return new Result(true, MessageConstant.SEND_VALIDATECODE_SUCCESS);
+        } catch (Exception e) {
+            log.error("发送验证码发生异常", e);
+            return new Result(false, MessageConstant.SEND_VALIDATECODE_FAIL);
+        }
+    }
+
+
 }

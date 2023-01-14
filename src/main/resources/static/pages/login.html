@@ -42,7 +42,7 @@
                 <div class="input-row">
                     <label>验证码</label>
                     <div class="loginInput">
-                        <input id='password' placeholder="请输入验证码" style="width:80%" type="password"
+                        <input id='password' placeholder="请输入验证码" style="width:80%" type="text"
                                v-model="loginInfo.validateCode">
                     </div>
                 </div>
@@ -86,10 +86,10 @@
                     this.$message.error('请输入正确的手机号');
                     return false;
                 }
-                axios.post("/login/check.do", this.loginInfo).then((response) => {
+                axios.post("/member/check.do", this.loginInfo).then((response) => {
                     if (response.data.flag) {
                         //登录成功,跳转到index.html
-                        window.location.href = "index.html";
+                        window.location.href = "member.html";
                     } else {
                         //失败，提示失败信息
                         this.$message.error(response.data.message);

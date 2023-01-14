@@ -47,3 +47,13 @@ W：W 字符代表着工作日 (星期一到星期五)，只能用在日域上�
 json --> {name:User.getname()} 使用get方法拿出对应的值
 mybatis --> select * from table; 查出数据 调用setxxx()方法 存放在实体类中 到时候要用的时候 调用getxxx()方法获取即可
 
+cookie 客户端 大小限制:4k
+session 服务端 放在内存、Redis
+
+1. 当用户登入会把用户名等信息放在session存储起来 并且会发一个标识符给cookie
+2. 当下次用户访问页面时 会把cookie携带发送给服务端
+3. 到服务端后拿出cookie的值去session找 如果登入了就访问相关页面
+
+!!!写任何代码 -->  代码逻辑：**先把错排除了**！
+
+
