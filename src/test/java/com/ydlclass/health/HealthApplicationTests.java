@@ -4,10 +4,10 @@ package com.ydlclass.health;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
-import java.util.concurrent.TimeUnit;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @SpringBootTest
 class HealthApplicationTests {
@@ -18,9 +18,9 @@ class HealthApplicationTests {
 
     @Test
     public void test1() {
-        BoundSetOperations<String, String> aa = redisTemplate.boundSetOps("aa");
-        aa.add("bb");
-        aa.expire(30, TimeUnit.SECONDS);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String format = simpleDateFormat.format(new Date());
+        System.out.println(format);
 
 
     }

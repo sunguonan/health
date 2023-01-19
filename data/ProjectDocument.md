@@ -1,8 +1,9 @@
 多对多 要借助一个中间表进行查询
-
 一对多 在多的中加一列
 user -->   class
 多个用户(class_id) --->  一个班级
+
+-----
 
 vue 有四个生命周期 八个钩子方法
 create 创建 -- beforecreate()  created()
@@ -10,20 +11,25 @@ mounte 挂载 -- beforemounte()  mounted()
 update 更新 -- beforeupdate()  updated()
 destory 销毁 -- beforedestory() destoried()
 
+-----
+
 http状态码
 2xx 没问题
 3xx 302重定向
 4xx 客户端有问题 404 浏览器访问服务器没有的页面
 5xx 服务端有问题
 
+-----
+
 数据格式
 form-data是基于post请求来传递数据的 可以传递文件
 x-www-form-urlencod 也是基于post请求传递数据
 对于get请求和post请求 走的格式都是urlencode格式 key=value&key=value
 
-cron表达式 -- 定时任务
+-----
 
-* * * * * * *
+cron表达式 -- 定时任务
+\* * * * * * *
 秒 分 时 日 月 周 年
 
 特殊字符:
@@ -44,8 +50,12 @@ W：W 字符代表着工作日 (星期一到星期五)，只能用在日域上�
 从每分钟的0秒开始每隔2秒执行一次
 一分钟执行30次
 
+-----
+
 json --> {name:User.getname()} 使用get方法拿出对应的值
 mybatis --> select * from table; 查出数据 调用setxxx()方法 存放在实体类中 到时候要用的时候 调用getxxx()方法获取即可
+
+-----
 
 cookie 客户端 大小限制:4k
 session 服务端 放在内存、Redis
@@ -54,6 +64,46 @@ session 服务端 放在内存、Redis
 2. 当下次用户访问页面时 会把cookie携带发送给服务端
 3. 到服务端后拿出cookie的值去session找 如果登入了就访问相关页面
 
+-----
+
 !!!写任何代码 -->  代码逻辑：**先把错排除了**！
+
+-----
+
+后端鉴权设计的表 总共五张表 (随着项目设计的不同 在这五张表的基础上还会新增不同的表)
+
+user 用户
+user_role 关联表 多对多
+
+role 角色
+role_auth 关联表 多对多
+
+auth 权限
+
+---
+
+redis 默认端口6379
+
+---
+
+Redis的持久化策略 -- aof and rdb
+
+rdb 直接将内存快照存在硬盘上
+aof 将指令存在硬盘上 比如
+在Redis中我们数据存储
+set a b
+set c d
+delete a
+使用aof策略时 只会存储 set c d  (会自动进行优化)
+
+---
+
+Redis的单线程可以保证事务的隔离级别性质 不会出现脏读 幻读
+Redis可以支持 30w/s
+
+
+
+
+
 
 
